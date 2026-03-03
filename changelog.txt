@@ -1,1 +1,89 @@
 
+1.0.0 - 2026-03-03
+------------------
+
+  ## Boss Menu
+  + Complete employee management (hire, fire, promote, demote — online & offline)
+  + Company bank accounts with dual currency (cash & gold)
+  + Deposits, withdrawals and full transaction history with charts
+  + Per-grade permissions (manage money, employees, storage, grades, etc.)
+  + Automated payroll system — salaries paid from company funds at configurable intervals
+  + Bonus system — send cash or gold to any employee, even offline
+  + On-duty / off-duty toggle with real-time tracking
+  + Company stash with purchasable slot upgrades (tiered pricing)
+  + Job offer popup with accept / decline for recruits
+  + Employee avatars — Discord profile auto-fetch or custom URL
+  + Resignation system — employees can leave on their own
+  + Full action history — every action logged and viewable
+  + Discord webhook logging for all admin actions & security alerts
+  + Modern NUI interface with responsive design
+  + Multi-language support (EN / FR / TH)
+
+  ## Job Creator (/jobcreator)
+  + Full visual editor — create entire jobs in-game without any config file
+  + Set job name, label, grades, salaries, permissions and more
+  + Place boss menu NPC or marker anywhere with 3D gizmo (gs_gizmo)
+  + Prop placement with live preview (cash registers, furniture, crates, etc.)
+  + Create harvest zones where employees collect resources
+  + Create sell points where employees sell collected items
+  + Create job shops with custom item lists and prices
+  + Per-zone interaction type (prompt / ox_target / pc_interaction)
+  + Every change saved to database and applied instantly — zero restart needed
+  + License-based admin access control
+
+  ## Community Hub (First on RedM)
+  + Browse jobs published by other server owners
+  + One-click import to install any community job on your server
+  + Share your own job creations with the entire community
+  + Discord profile integration (avatar & username displayed automatically)
+  + Built-in moderation tools for content management
+  + Everything happens live — no file transfer, no restart
+
+  ## Multi-Framework Bridge
+  + Auto-detects VORP Core or RSG-Core at startup
+  + Bridge abstraction layer (bridge/loader.lua, bridge/rsg/, bridge/vorp/)
+  + All server/client calls go through Bridge.* API
+  + Automatic job registration for RSG-Core (sync_jobs.lua)
+  + Jobs auto-synced to RSG-Core shared jobs at startup
+  + Install helpers for RSG-Core (install/forBossmenu.lua, install/forMultijob.lua)
+
+  ## Exports API
+  + Server: GetBusinessBalance, AddBusinessMoney, RemoveBusinessMoney, SetBusinessBalance
+  + Server: AddBusinessGold, RemoveBusinessGold, CanBusinessAfford
+  + Server: IsPlayerOnDuty, GetPlayersOnDuty, GetAllPlayersOnDuty, GetPlayersOnDutyByJob
+  + Server: SetPlayerOnDuty, GetPlayerJobInfo, IsResourceActive
+  + Server: IsPaycheckEnabled, GetPaycheckSystem, UpdatePlayerSalary, GetPlayerPaycheck
+  + Server: GetCachedGradeSalary, GetCachedGradePermissions, GetCachedCompanyBalance
+  + Server: SyncJobsViaExports, JobExistsInRSG
+  + Client: OpenBossMenu, IsPlayerOnDuty, GetPlayerJob, IsResourceActive
+
+  ## Configuration
+  + config.lua — locale, interaction, salary, Discord webhook, framework settings
+  + config_notifications.lua — notification system hooks (rsg, vorp, redem, bln, nui)
+  + config_inventory.lua — inventory system & stash slot upgrade pricing
+  + config_trad.lua — all translatable strings (EN / FR / TH)
+  + All config files excluded from escrow
+
+  ## Security & Performance
+  + Server-side permission checks on all actions
+  + Rate limiting on sensitive operations
+  + Anti-exploit protections
+  + Optimized SQL queries with proper indexing
+  + Grade caching system for performance
+  + Database tables auto-created on first start
+  + 0.00ms idle / 0.01ms on interaction
+
+  ## Admin & Commands
+  + /jobcreator — open the visual Job Creator panel
+  + /syncgrades — force re-sync all grades to database
+  + /fixgrades — repair corrupted grade data
+  + /syncjobs — manually re-sync jobs to framework
+  + /listjobs — view all registered jobs in console
+
+  ## Technical
+  + ~33,000 lines of code
+  + 27 server files, 17 client files, 4 config files
+  + Lua 5.4 enabled
+  + OxMySQL integration
+  ! Requires: oxmysql, gs_gizmo + (vorp_core OR rsg-core)
+  ! Optional: ox_target (+ ox_lib), pc_interaction
