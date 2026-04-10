@@ -1,43 +1,43 @@
-1.1.0 - 2026-03-23
+1.2.0 - 2026-04-10
 ------------------
 
-  ## Community Hub — Job Import & Sharing
-  + Browse jobs published by other server owners via the Community Hub
-  + One-click import — install any community job straight into your database
-  + Share your own custom job creations with the community
-  + Discord profile integration (avatar & username displayed automatically)
-  + Community Discord webhook logging for import & share actions
-  + GitHub-based backend — all jobs are version-controlled
+  ## rsg-multijob Compatibility
+  + Full integration with rsg-multijob resource
+  + /addjob command — assign any Job Creator job to a player
+  + Automatic job sync between cactus_ultimate and rsg-multijob
+  + myJobs callback rewritten for proper multijob support
+  + GetFreshJobs() pattern for reliable cross-resource data
+  + Install helper included (install/forMultijob.lua)
 
-  ## Action History
-  + Full company action history — every action logged and viewable by managers
-  + Tracks: hire, fire, promote, demote, deposits, withdrawals, bonuses, salary payments
-  + Per-action details: actor, target, old value, new value, amount, timestamp
-  + Permission-based access: `canViewHistory` and `canViewFullHistory`
-  + Filterable and sortable in the NUI interface
+  ## Craft Integration in Job Creator (CACTUS_CRAFT REQUIRE)
+  + Per-job craft stations, recipes & categories — configured directly from the Job Creator UI
+  + New "Craft Settings" page — global craft configuration from the Job Creator dashboard
+  + Live config source indicator (Database / Live / Defaults)
+  + Craft section & settings page auto-hidden when cactus_craft is not installed
+  + Item image map — correct item images pulled from framework (RSGCore.Shared.Items)
+  + Full NUI: buildCrafting(), collectFormIntoEditing, translations (100+ keys FR/EN)
+  + DB migration: craftStations, craftRecipes, craftCategories JSON columns in jobcreator_jobs
+  + DB table: craft_global_settings (single-row JSON storage)
 
-  ## Discord Webhooks (Enhanced)
-  + Per-job Discord webhook configuration (set via boss menu)
-  + Webhook logging for harvest actions (items harvested, zone, quantity)
-  + Webhook logging for sales (items sold, revenue split company/player)
-  + Webhook logging for shop purchases (player-paid or company-paid)
-  + Webhook logging for salary payments
-  + Webhook logging for deposits & withdrawals
-  + Color-coded embeds per action type (green = harvest/hire, red = fire, gold = sell, etc.)
+  ## Hot-Reload System
+  + Save craft settings → applied instantly in-game, no restart needed
+  + Save per-job craft data → stations, recipes & categories updated live via ReloadCraftData
+  + Global settings (notification system, XP, keys, images...) hot-reloaded to all players
+  + ReloadGlobalSettings export triggers cactus_craft live config update
 
-  ## RSG-Core & VORP Optimization
-  + Automatic job synchronization at startup — jobs auto-registered in framework
-  + RSG-Core: direct integration with RSGCore.Shared.Jobs registry
-  + RSG-Core: native job management (Bridge.JobExists, Bridge.AddJobToCore, Bridge.UpdateJobInCore)
-  + VORP Core: custom in-memory JobsRegistry (VORP has no native jobs system)
-  + VORP Core: WrapVORPPlayer() — normalizes VORP character data to unified format
-  + VORP Core: custom duty system implementation (VORP has no native on-duty support)
-  + Grade synchronization from config to database (SyncGradesFromConfig)
-  + ConvertJobToCoreFormat() — converts Config.Companies to framework-native format
-  + Automatic framework detection — zero config change needed between RSG & VORP
+  ## Auto Framework Detection
+  + Framework auto-detected from running resources (rsg-core / vorp_core) — zero config needed
+  + Framework field locked (read-only) in Craft Settings UI
+  + Notification system remains fully configurable by the user (select dropdown)
+  + Detected framework injected into GetAllCraftConfigs and craft settings on load/save
 
   ## Bug Fixes & Improvements
-  * Optimized SQL queries with proper indexing for history and community tables
-  * Improved grade caching system for better performance
-  * Added `webhook` column to businesses table for per-job webhook URLs
-  * Install helpers updated for RSG-Core and multijob compatibility
+  * Fixed IsPlayerAdmin nil error → replaced with IsAllowedAdmin
+  * Fixed missing NUI toast notifications (showNotif → showToast)
+  * Fixed craft data not loading in job editor (LoadAllJobsForCreator missing 3 craft columns)
+  * Fixed InventoryImgPath not propagating to client (added to DynamicGlobalSettings broadcast)
+  * Fixed item images using wrong filenames (imageMap system from RSGCore.Shared.Items)
+  * Fixed resource name mismatch (rsg_inventory → rsg-inventory)
+  * Fixed SyncCreatedJobToCore cross-resource memory desync in lua54 mode
+  * Optimized LoadAllJobsForCreator with craft columns
+  * $.post .done()/.fail() callbacks for reliable NUI save feedback
